@@ -1,0 +1,5 @@
+# onchain-riddle/Cargo.toml
+[workspace]
+resolver = "2"
+members = ["onchain-riddle-robot"]
+exclude = ["onchain-riddle-web", "onchain-riddle-contracts"]

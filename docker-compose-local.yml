@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: ./onchain-riddle-web
+      dockerfile: Dockerfile
+    container_name: nextjs-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  robot:
+    build:
+      context: .
+      dockerfile: onchain-riddle-robot/Dockerfile
+    container_name: onchain-riddle-robot
+    environment:
+      - RPC_URL=${RPC_URL}
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS}  
+

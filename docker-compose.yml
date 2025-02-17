@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web:
+    image: ghcr.io/kuchmenko/nextjs-web:latest
+    container_name: nextjs-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  robot:
+    image: ghcr.io/kuchmenko/onchain-riddle-robot:latest
+    container_name: onchain-riddle-robot
+    environment:
+      - RPC_URL=https://base-goerli.chainstacklabs.com
+      - PRIVATE_KEY=0xYourBotPrivateKey
+      - OPENAI_API_KEY=your_openai_api_key
+      - CONTRACT_ADDRESS=0xYourDeployedContractAddress
+      - CHAIN_ID=84531
+

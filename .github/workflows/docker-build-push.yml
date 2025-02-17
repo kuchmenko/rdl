@@ -1,0 +1,62 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-web:
+    name: Build and Push Web Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Web Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./onchain-riddle-web
+          file: ./onchain-riddle-web/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/nextjs-web:latest
+
+  build-robot:
+    name: Build and Push Robot Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Robot Image
+        uses: docker/build-push-action@v4
+        with:
+          # Use the repository root as context because the robot Dockerfile is workspace-aware.
+          context: .
+          file: ./onchain-riddle-robot/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/onchain-riddle-robot:latest
+

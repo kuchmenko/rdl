@@ -1,0 +1,8 @@
+set dotenv-load
+
+deploy:
+	@echo "Deploying OnchainRiddle contract to Base..."
+	# Source the .env file and run the deployment script.
+	# Use $$RPC_URL to pass the shell variable correctly.
+	forge script script/DeployOnchainRiddle.s.sol --broadcast --verify --rpc-url=$RPC_URL
+

@@ -1,0 +1,22 @@
+# ===== Rust / Cargo =====
+/target/
+/**/target/
+
+# ===== Foundry (Forge) Artifacts =====
+/out/
+/cache/
+
+# ===== Node.js =====
+/node_modules/
+.vscode/
+
+# JetBrains IDE settings
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# ===== Environment files =====
+.env
+
