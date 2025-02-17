@@ -7,6 +7,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 # Copy the entire source code and build the app
 COPY . .
+RUN cp .env.example .env
 RUN yarn build
 
 # Stage 2: Production Runner
